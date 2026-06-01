@@ -76,7 +76,7 @@ const icons = {
 function Nav({ currentPage, setPage }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ["Home", "Services", "Pricing", "Gallery", "About", "Contact"];
+  const links = ["Home", "Services", "Pricing", "Contact"];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -244,7 +244,6 @@ function HeroSection({ setPage }) {
           {/* Trust badges */}
           <div style={{ display: "flex", gap: 24, marginTop: 56, flexWrap: "wrap" }}>
             {[
-              { icon: icons.shield, label: "Fully Insured" },
               { icon: icons.leaf, label: "Respectful Methods" },
               { icon: icons.heart, label: "Family-Owned" },
             ].map(b => (
@@ -322,12 +321,11 @@ function BeforeAfterSlider({ label = "" }) {
 // ─── Why Choose Us ────────────────────────────────────────────────────────────
 function WhyChooseUs() {
   const reasons = [
-    { icon: icons.shield, title: "Fully Insured & Accountable", desc: "Every visit is documented. We carry full liability insurance for complete peace of mind." },
     { icon: icons.leaf, title: "Safe Preservation Methods", desc: "We never use bleach, pressure washers, or harmful chemicals — only approved, stone-safe solutions." },
     { icon: icons.heart, title: "Family-Owned & Local", desc: "Based right here in Albany, NY. We treat every memorial as if it were our own family's." },
     { icon: icons.camera, title: "Photo Documentation", desc: "We photograph each memorial before and after service and email you the results." },
     { icon: icons.calendar, title: "Flexible Care Plans", desc: "One-time visits or recurring annual care subscriptions — whatever fits your needs." },
-    { icon: icons.sparkle, title: "25+ Years of Experience", desc: "Deep expertise in cleaning marble, granite, limestone, bronze, and sandstone memorials." },
+
   ];
 
   return (
@@ -607,14 +605,14 @@ function CTABanner({ setPage }) {
             }}>
               Get a Free Quote
             </button>
-            <a href="tel:+15185550147" style={{
+            <a href="tel:+15189519503" style={{
               display: "inline-flex", alignItems: "center", gap: 8,
               background: "transparent", color: COLORS.white,
               border: "2px solid rgba(255,255,255,0.6)", cursor: "pointer",
               padding: "16px 40px", borderRadius: 50, fontSize: 16, fontWeight: 600,
               fontFamily: "'DM Sans', sans-serif", textDecoration: "none",
             }}>
-              {icons.phone} (518) 555-0147
+              {icons.phone} (518) 951-9503
             </a>
           </div>
         </FadeIn>
@@ -628,29 +626,59 @@ function HomePage({ setPage }) {
   return (
     <>
       <HeroSection setPage={setPage} />
-      {/* Before/After Gallery */}
+      {/* Image Placeholder Gallery */}
       <section style={{ padding: "100px 2rem", background: COLORS.white }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
               <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: 14, letterSpacing: "0.2em", textTransform: "uppercase", color: COLORS.sage, marginBottom: 16 }}>The Transformation</p>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: COLORS.charcoal, fontWeight: 700, letterSpacing: "-0.02em" }}>
-                Before & After Gallery
+                Before & After Results
               </h2>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", color: COLORS.warmGray, fontSize: 15, marginTop: 16 }}>Drag the slider to see the transformation</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: COLORS.warmGray, fontSize: 15, marginTop: 16 }}>Real results from our memorial care services across the Capital Region</p>
             </div>
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
-            {["Granite Headstone", "Marble Monument", "Bronze Flat Marker"].map((l, i) => (
-              <FadeIn key={l} delay={i * 0.1}>
-                <BeforeAfterSlider label={l} />
+            {[
+              { label: "Granite Headstone", tag: "Cleaning", icon: "🪦", bg: `linear-gradient(135deg, #7A8B7A 0%, #4A6A4A 100%)` },
+              { label: "Family Monument", tag: "Monument", icon: "🏛️", bg: `linear-gradient(135deg, ${COLORS.stone} 0%, ${COLORS.stoneDark} 100%)` },
+              { label: "Bronze Flat Marker", tag: "Bronze", icon: "⬛", bg: `linear-gradient(135deg, #8B7355 0%, #6B5535 100%)` },
+            ].map((item, i) => (
+              <FadeIn key={item.label} delay={i * 0.1}>
+                <div style={{
+                  borderRadius: 16, overflow: "hidden", height: 260,
+                  background: item.bg, display: "flex", flexDirection: "column",
+                  alignItems: "center", justifyContent: "center", position: "relative",
+                  boxShadow: "0 8px 32px rgba(44,44,42,0.15)",
+                }}>
+                  {/* Placeholder pattern */}
+                  <div style={{ position: "absolute", inset: 0, opacity: 0.06 }}>
+                    <svg width="100%" height="100%"><defs><pattern id={`grid-${i}`} width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="white" strokeWidth="1"/></pattern></defs><rect width="100%" height="100%" fill={`url(#grid-${i})`}/></svg>
+                  </div>
+                  <div style={{ textAlign: "center", position: "relative" }}>
+                    <div style={{ fontSize: 52, marginBottom: 12 }}>{item.icon}</div>
+                    <div style={{ background: "rgba(255,255,255,0.15)", border: "1px dashed rgba(255,255,255,0.4)", borderRadius: 12, padding: "12px 24px" }}>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.9)", fontSize: 13, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>📸 Photo Coming Soon</div>
+                      <div style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.65)", fontSize: 12, marginTop: 4 }}>{item.label}</div>
+                    </div>
+                  </div>
+                  <div style={{ position: "absolute", bottom: 16, left: 16 }}>
+                    <span style={{ background: COLORS.sage, color: "#fff", fontSize: 10, padding: "4px 12px", borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>{item.tag}</span>
+                  </div>
+                </div>
               </FadeIn>
             ))}
           </div>
+          <FadeIn delay={0.2}>
+            <div style={{ textAlign: "center", marginTop: 32 }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: COLORS.warmGray, fontSize: 13, fontStyle: "italic" }}>
+                Photos of completed work will be added soon. Contact us to see examples specific to your memorial type.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
       <WhyChooseUs />
-      <Testimonials />
       <ServiceAreas />
       <PricingPreview setPage={setPage} />
       <FAQ />
@@ -666,11 +694,6 @@ function ServicesPage({ setPage }) {
     { icon: icons.sparkle, name: "Family Monument Cleaning", desc: "Full-service restoration for large family monuments, multi-grave plots, and complex stone structures. Detailed and thorough work.", price: "$250–$500+" },
     { icon: icons.bronze, name: "Bronze Marker Cleaning", desc: "Specialized care for bronze memorial plaques and markers. We restore the original patina and apply protective wax coating.", price: "$85–$150" },
     { icon: icons.flower, name: "Flower Placement", desc: "Fresh or artificial flower arrangements placed at the grave on your schedule or for special occasions. We photograph and send you confirmation.", price: "$35–$75" },
-    { icon: icons.calendar, name: "Seasonal Memorial Visits", desc: "Scheduled visits in spring, summer, fall, and winter to maintain cleanliness and report on any memorial changes or concerns.", price: "From $199/year" },
-    { icon: icons.snowflake, name: "Holiday Decoration Placement", desc: "We place and remove holiday decorations (Christmas, Memorial Day, Veterans Day, Mother's Day) on your behalf. Dignified and tasteful.", price: "$45–$95" },
-    { icon: icons.camera, name: "Photo Documentation Service", desc: "Perfect for out-of-state families. We visit, photograph the memorial from multiple angles, and deliver a detailed report with high-res photos.", price: "$45–$65" },
-    { icon: icons.plan, name: "Annual Subscription Plans", desc: "Choose a recurring care plan for ongoing memorial maintenance year-round. Includes multiple visits, cleaning, and photo updates.", price: "From $199/year" },
-    { icon: icons.globe, name: "Out-of-State Family Support", desc: "We serve as your local representatives. Regular check-ins, damage reporting, and care coordination for families who can't visit frequently.", price: "Custom" },
   ];
 
   return (
@@ -734,8 +757,8 @@ function ServicesPage({ setPage }) {
           </FadeIn>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
             {[
-              { name: "Essential", visits: "2 visits/year", price: "$199", features: ["Spring & Fall cleaning", "Photo report", "Email updates"] },
-              { name: "Premium", visits: "4 visits/year", price: "$349", features: ["Quarterly cleanings", "Flower placement included", "Priority scheduling", "Phone updates"] },
+              { name: "Essential", visits: "2 visits/year", price: "$199", features: ["Spring & Fall cleaning", "Photo report"] },
+              { name: "Premium", visits: "4 visits/year", price: "$349", features: ["Quarterly cleanings", "Flower placement included", "Priority scheduling"] },
               { name: "Family", visits: "6 visits/year", price: "$499", features: ["Bi-monthly visits", "Seasonal decorations", "Multiple markers", "Dedicated care coordinator"] },
             ].map((plan, i) => (
               <FadeIn key={plan.name} delay={i * 0.1}>
@@ -806,14 +829,12 @@ function PricingPage({ setPage }) {
           <div style={{ background: COLORS.white, borderRadius: 20, overflow: "hidden", boxShadow: "0 2px 20px rgba(44,44,42,0.06)", marginBottom: 64 }}>
             {[
               { service: "Flower Placement", price: "$35–$75" },
-              { service: "Photo Documentation (standalone)", price: "$45–$65" },
               { service: "Holiday Decoration Placement", price: "$45–$95" },
-              { service: "Protective Stone Sealant", price: "$40–$80" },
               { service: "Leveling/Flag holder installation", price: "$25–$50" },
               { service: "Bronze wax coating", price: "$30–$60" },
             ].map((row, i) => (
               <FadeIn key={row.service} delay={i * 0.04}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 28px", borderBottom: i < 5 ? `1px solid ${COLORS.stoneLight}20` : "none" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "18px 28px", borderBottom: i < 3 ? `1px solid ${COLORS.stoneLight}20` : "none" }}>
                   <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, color: COLORS.charcoal }}>{row.service}</span>
                   <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 700, color: COLORS.sage }}>{row.price}</span>
                 </div>
@@ -1078,8 +1099,8 @@ function ContactPage() {
             <div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, color: COLORS.charcoal, marginBottom: 32, fontWeight: 700 }}>Get in Touch</h2>
               {[
-                { icon: icons.phone, label: "Phone", value: "(518) 555-0147", href: "tel:+15185550147" },
-                { icon: icons.mail, label: "Email", value: "hello@capitalregionmemorialcare.com", href: "mailto:hello@capitalregionmemorialcare.com" },
+                { icon: icons.phone, label: "Phone", value: "(518) 951-9503", href: "tel:+15189519503" },
+                { icon: icons.mail, label: "Email", value: "capitalmemorialcare@gmail.com", href: "mailto:capitalmemorialcare@gmail.com" },
                 { icon: icons.mapPin, label: "Service Area", value: "Albany & Capital Region, NY", href: null },
               ].map(c => (
                 <div key={c.label} style={{ display: "flex", gap: 16, marginBottom: 28, alignItems: "flex-start" }}>
@@ -1202,8 +1223,8 @@ function Footer({ setPage }) {
             </div>
           </div>
           {[
-            { title: "Services", links: ["Gravestone Cleaning", "Bronze Markers", "Flower Placement", "Seasonal Visits", "Care Plans"] },
-            { title: "Company", links: ["About", "Gallery", "Pricing", "Contact", "Free Quote"] },
+            { title: "Services", links: ["Gravestone Cleaning", "Bronze Markers", "Flower Placement", "Care Plans"] },
+            { title: "Company", links: ["Pricing", "Contact", "Free Quote"] },
             { title: "Service Areas", links: ["Albany", "Troy", "Schenectady", "Saratoga Springs", "Colonie & Latham"] },
           ].map(col => (
             <div key={col.title}>
@@ -1287,8 +1308,6 @@ export default function App() {
     switch (page) {
       case "Services": return <ServicesPage setPage={setPageAndScroll} />;
       case "Pricing": return <PricingPage setPage={setPageAndScroll} />;
-      case "Gallery": return <GalleryPage />;
-      case "About": return <AboutPage setPage={setPageAndScroll} />;
       case "Contact": return <ContactPage />;
       default: return <HomePage setPage={setPageAndScroll} />;
     }
